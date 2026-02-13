@@ -1,2 +1,3 @@
 fastapi[standard]
 sentence_transformers
+PyYAML

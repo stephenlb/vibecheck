@@ -1,32 +1,55 @@
 import json
 from fastapi import FastAPI, Request
 from sentence_transformers import SentenceTransformer
+import yaml
+
+## Load config
+config = None
+with open('config.yaml', 'r') as file:
+    try:
+        config = yaml.safe_load(file)
+    except yaml.YAMLError as exc:
+        print(exc)
+
+## Load model
+model = SentenceTransformer(config['model'])
+
+## Initial vectors for each classification
+classifications = {}
+for classification in config['classifications']:
+    name = classification['name']
+    keywords = [classification['keywords']]
+    classifications[name] = model.encode(keywords)
 
 app = FastAPI()
 
+## POST Endpoint
 @app.post("/")
 async def index(request: Request):
     body = await request.body()
-    text = body.decode("utf-8")
-    #return text
-    return vibe("good, good job!")
-    #return vibe(text)
+    sentance = body.decode("utf-8")
+    return classify(sentance)
 
-model = SentenceTransformer("google/embeddinggemma-300m")
-## TODO in yaml format
-praises = model.encode(["good job, amazing"])
-positivity = model.encode(["happy awesome joy good excellent nice amazing"])
+## Clasification function
+def classify(sentance: str) -> dict:
+    response = {}
+    for name, baseline in classifications.items():
+        response[name] = vibe(baseline, sentance)
+    return response
 
-def vibe(sentance: str) -> float:
+    
+
+## Classification function
+def vibe(baseline, sentance: str) -> float:
     embedding = model.encode([sentance])
-    similar = model.similarity(embedding, positivity)
+    similar = model.similarity(embedding, baseline)
     return float(similar.detach().cpu().numpy()[0][0])
 
 ## TODO REMOVE this is just for debugging...
-print("bad", vibe("bad, you did badly"))
-print("bad in Lithuanian", vibe("blogai, blogai padarei"))
-print("good", vibe("good, good job!"))
-print("well", vibe("you did well"))
-print("poor", vibe("you did poorly"))
-print("emoji 🎉", vibe("🎉"))
-print("emoji 😞", vibe("😞"))
+print("bad", classify("bad, you did badly"))
+print("bad in Lithuanian", classify("blogai, blogai padarei"))
+print("good", classify("good, good job!"))
+print("well", classify("you did well"))
+print("poor", classify("you did poorly"))
+print("emoji 🎉", classify("🎉"))
+print("emoji 😞", classify("😞"))

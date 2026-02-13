@@ -1,0 +1,10 @@
+model: "google/embeddinggemma-300m"
+classifications:
+  - name: praises
+    keywords: "good job amazing you did well"
+  - name: positivity
+    keywords: "happy awesome joy good excellent nice amazing"
+  - name: negativity
+    keywords: "bad sad mad angry upset awful"
+  - name: bullying
+    keywords: "noob glue eater dork nerd dweeb"
