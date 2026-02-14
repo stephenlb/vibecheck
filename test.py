@@ -1,104 +1,113 @@
 from main import classify
 
-## Tests
-print("--- negativity ---")
-print("bad", classify("bad, you did badly"))
-print("bad in Lithuanian", classify("blogai, blogai padarei"))
-print("poor", classify("you did poorly"))
-print("terrible day", classify("this has been a terrible day"))
-print("terrible in French", classify("c'est vraiment terrible, quelle horreur"))
-print("bad in Japanese", classify("最悪だ、本当にひどい"))
-print("awful in German", classify("das war schrecklich, einfach furchtbar"))
+tests = [
+    ## negativity
+    ("bad", "bad, you did badly", "negativity"),
+    ("bad in Lithuanian", "blogai, blogai padarei", "negativity"),
+    ("poor", "you did poorly", "negativity"),
+    ("terrible day", "this has been a terrible day", "negativity"),
+    ("terrible in French", "c'est vraiment terrible, quelle horreur", "negativity"),
+    ("bad in Japanese", "最悪だ、本当にひどい", "negativity"),
+    ("awful in German", "das war schrecklich, einfach furchtbar", "negativity"),
+    ## positivity
+    ("good", "good, good job!", "positivity"),
+    ("well", "you did well", "positivity"),
+    ("beautiful day", "what a beautiful day it is", "positivity"),
+    ("happy in Spanish", "estoy muy feliz, que dia tan bonito", "positivity"),
+    ("joy in Korean", "너무 행복해요, 오늘 정말 좋은 날이에요", "positivity"),
+    ("wonderful in Italian", "che bella giornata, sono contentissimo", "positivity"),
+    ## praises
+    ("excellent work", "excellent work on this project", "praises"),
+    ("proud of you", "I am so proud of you", "praises"),
+    ("nailed it", "you absolutely nailed it", "praises"),
+    ("bravo in French", "bravo, travail magnifique", "praises"),
+    ("well done in Portuguese", "muito bem, excelente trabalho", "praises"),
+    ("great in Japanese", "素晴らしい仕事ですね、よくやった", "praises"),
+    ## bullying
+    ("insult", "you are such an idiot", "bullying"),
+    ("exclusion", "nobody wants you here, go away", "bullying"),
+    ("mockery", "everyone laughs at you behind your back", "bullying"),
+    ("insult in Spanish", "eres un completo idiota, nadie te quiere", "bullying"),
+    ("mockery in French", "t'es qu'un nul, tout le monde se moque de toi", "bullying"),
+    ("insult in German", "du bist so ein Idiot, niemand mag dich", "bullying"),
+    ## sarcasm
+    ("oh really", "oh really, what a shocker", "sarcasm"),
+    ("sure thing", "yeah right, sure thing buddy", "sarcasm"),
+    ("slow clap", "wow, slow clap for that brilliant idea", "sarcasm"),
+    ("sarcasm in French", "oh bien sur, quelle surprise incroyable", "sarcasm"),
+    ("sarcasm in Spanish", "si claro, como si eso fuera verdad", "sarcasm"),
+    ("sarcasm in German", "ja klar, was fuer eine Ueberraschung", "sarcasm"),
+    ## gratitude
+    ("thank you", "thank you so much for your help", "gratitude"),
+    ("appreciate it", "I really appreciate everything you have done", "gratitude"),
+    ("thanks in Spanish", "muchas gracias por todo", "gratitude"),
+    ("thanks in French", "merci beaucoup pour tout, je vous suis reconnaissant", "gratitude"),
+    ("thanks in Japanese", "本当にありがとうございます、感謝しています", "gratitude"),
+    ("thanks in Portuguese", "muito obrigado por tudo que voce fez", "gratitude"),
+    ## encouragement
+    ("you can do it", "you can do it, I believe in you!", "encouragement"),
+    ("keep going", "don't give up, keep pushing forward", "encouragement"),
+    ("team spirit", "let's go team, we've got this!", "encouragement"),
+    ("courage in French", "tu peux le faire, je crois en toi, courage", "encouragement"),
+    ("go for it in Spanish", "tu puedes, no te rindas, adelante", "encouragement"),
+    ("keep going in Japanese", "頑張って、あなたならできる", "encouragement"),
+    ## humor
+    ("lol", "lol that was hilarious", "humor"),
+    ("joke", "why did the chicken cross the road", "humor"),
+    ("haha", "haha I can't stop laughing", "humor"),
+    ("funny in Spanish", "jajaja que gracioso, no puedo parar de reir", "humor"),
+    ("funny in French", "mdr trop drole, je suis mort de rire", "humor"),
+    ("funny in Korean", "ㅋㅋㅋ 너무 웃겨요, 배꼽 빠지겠어", "humor"),
+    ## frustration
+    ("annoyed", "ugh this is so annoying, nothing works", "frustration"),
+    ("fed up", "I am so fed up with this nonsense", "frustration"),
+    ("why", "why does this keep happening to me", "frustration"),
+    ("frustrated in Spanish", "estoy harto, nada funciona, que rabia", "frustration"),
+    ("frustrated in French", "j'en ai marre, rien ne marche, c'est insupportable", "frustration"),
+    ("frustrated in Japanese", "もうイライラする、何もうまくいかない", "frustration"),
+    ## curiosity
+    ("how", "how does this work exactly?", "curiosity"),
+    ("wonder", "I wonder what would happen if we tried that", "curiosity"),
+    ("explain", "can you explain this to me?", "curiosity"),
+    ("curious in Spanish", "como funciona esto exactamente?", "curiosity"),
+    ("curious in French", "comment ca marche? je voudrais comprendre", "curiosity"),
+    ("curious in Japanese", "これはどういう仕組みですか？教えてください", "curiosity"),
+    ## toxicity
+    ("threat", "I will find you and hurt you", "toxicity"),
+    ("hate", "I hate everyone like you", "toxicity"),
+    ("slur", "you disgusting piece of garbage, die", "toxicity"),
+    ("threat in Spanish", "te voy a encontrar y te vas a arrepentir", "toxicity"),
+    ("hate in French", "je te deteste, tu merites de souffrir", "toxicity"),
+    ("threat in German", "ich werde dich finden und du wirst es bereuen", "toxicity"),
+    ## emoji
+    ("emoji 🎉", "🎉", "positivity"),
+    ("emoji 😞", "😞", "negativity"),
+    ("emoji 😂", "😂😂😂", "humor"),
+    ("emoji ❤️", "❤️", "gratitude"),
+    ("emoji 🤔", "🤔", "curiosity"),
+    ## mixed signals
+    ("sarcastic praise", "oh great job, really, what a genius move", "sarcasm"),
+    ("backhanded compliment", "well you tried your best I guess", "praises"),
+    ("polite frustration", "with all due respect, this is unacceptable", "negativity"),
+    ("encouraging criticism", "you made a mistake but I know you can fix it", "encouragement"),
+]
 
-print("--- positivity ---")
-print("good", classify("good, good job!"))
-print("well", classify("you did well"))
-print("beautiful day", classify("what a beautiful day it is"))
-print("happy in Spanish", classify("estoy muy feliz, que dia tan bonito"))
-print("joy in Korean", classify("너무 행복해요, 오늘 정말 좋은 날이에요"))
-print("wonderful in Italian", classify("che bella giornata, sono contentissimo"))
+passed = 0
+failed = 0
 
-print("--- praises ---")
-print("excellent work", classify("excellent work on this project"))
-print("proud of you", classify("I am so proud of you"))
-print("nailed it", classify("you absolutely nailed it"))
-print("bravo in French", classify("bravo, travail magnifique"))
-print("well done in Portuguese", classify("muito bem, excelente trabalho"))
-print("great in Japanese", classify("素晴らしい仕事ですね、よくやった"))
+for label, text, expected in tests:
+    scores = classify(text)
+    top = max(scores, key=scores.get)
+    top_score = scores[top]
+    expected_score = scores[expected]
+    ok = top == expected
+    status = "PASS" if ok else "FAIL"
 
-print("--- bullying ---")
-print("insult", classify("you are such an idiot"))
-print("exclusion", classify("nobody wants you here, go away"))
-print("mockery", classify("everyone laughs at you behind your back"))
-print("insult in Spanish", classify("eres un completo idiota, nadie te quiere"))
-print("mockery in French", classify("t'es qu'un nul, tout le monde se moque de toi"))
-print("insult in German", classify("du bist so ein Idiot, niemand mag dich"))
+    if ok:
+        passed += 1
+        print(f"  {status}  {label:30s} -> {top:15s} ({top_score:.3f})")
+    else:
+        failed += 1
+        print(f"  {status}  {label:30s} -> {top:15s} ({top_score:.3f})  expected {expected} ({expected_score:.3f})")
 
-print("--- sarcasm ---")
-print("oh really", classify("oh really, what a shocker"))
-print("sure thing", classify("yeah right, sure thing buddy"))
-print("slow clap", classify("wow, slow clap for that brilliant idea"))
-print("sarcasm in French", classify("oh bien sur, quelle surprise incroyable"))
-print("sarcasm in Spanish", classify("si claro, como si eso fuera verdad"))
-print("sarcasm in German", classify("ja klar, was fuer eine Ueberraschung"))
-
-print("--- gratitude ---")
-print("thank you", classify("thank you so much for your help"))
-print("appreciate it", classify("I really appreciate everything you have done"))
-print("thanks in Spanish", classify("muchas gracias por todo"))
-print("thanks in French", classify("merci beaucoup pour tout, je vous suis reconnaissant"))
-print("thanks in Japanese", classify("本当にありがとうございます、感謝しています"))
-print("thanks in Portuguese", classify("muito obrigado por tudo que voce fez"))
-
-print("--- encouragement ---")
-print("you can do it", classify("you can do it, I believe in you!"))
-print("keep going", classify("don't give up, keep pushing forward"))
-print("team spirit", classify("let's go team, we've got this!"))
-print("courage in French", classify("tu peux le faire, je crois en toi, courage"))
-print("go for it in Spanish", classify("tu puedes, no te rindas, adelante"))
-print("keep going in Japanese", classify("頑張って、あなたならできる"))
-
-print("--- humor ---")
-print("lol", classify("lol that was hilarious"))
-print("joke", classify("why did the chicken cross the road"))
-print("haha", classify("haha I can't stop laughing"))
-print("funny in Spanish", classify("jajaja que gracioso, no puedo parar de reir"))
-print("funny in French", classify("mdr trop drole, je suis mort de rire"))
-print("funny in Korean", classify("ㅋㅋㅋ 너무 웃겨요, 배꼽 빠지겠어"))
-
-print("--- frustration ---")
-print("annoyed", classify("ugh this is so annoying, nothing works"))
-print("fed up", classify("I am so fed up with this nonsense"))
-print("why", classify("why does this keep happening to me"))
-print("frustrated in Spanish", classify("estoy harto, nada funciona, que rabia"))
-print("frustrated in French", classify("j'en ai marre, rien ne marche, c'est insupportable"))
-print("frustrated in Japanese", classify("もうイライラする、何もうまくいかない"))
-
-print("--- curiosity ---")
-print("how", classify("how does this work exactly?"))
-print("wonder", classify("I wonder what would happen if we tried that"))
-print("explain", classify("can you explain this to me?"))
-print("curious in Spanish", classify("como funciona esto exactamente?"))
-print("curious in French", classify("comment ca marche? je voudrais comprendre"))
-print("curious in Japanese", classify("これはどういう仕組みですか？教えてください"))
-
-print("--- toxicity ---")
-print("threat", classify("I will find you and hurt you"))
-print("hate", classify("I hate everyone like you"))
-print("slur", classify("you disgusting piece of garbage, die"))
-print("threat in Spanish", classify("te voy a encontrar y te vas a arrepentir"))
-print("hate in French", classify("je te deteste, tu merites de souffrir"))
-print("threat in German", classify("ich werde dich finden und du wirst es bereuen"))
-
-print("--- emoji ---")
-print("emoji 🎉", classify("🎉"))
-print("emoji 😞", classify("😞"))
-print("emoji 😂", classify("😂😂😂"))
-print("emoji ❤️", classify("❤️"))
-print("emoji 🤔", classify("🤔"))
-
-print("--- mixed signals ---")
-print("sarcastic praise", classify("oh great job, really, what a genius move"))
-print("backhanded compliment", classify("well you tried your best I guess"))
-print("polite frustration", classify("with all due respect, this is unacceptable"))
-print("encouraging criticism", classify("you made a mistake but I know you can fix it"))
+print(f"\n{passed}/{passed + failed} passed, {failed} failed")

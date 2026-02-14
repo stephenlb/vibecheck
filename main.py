@@ -11,7 +11,7 @@ with open('config.yaml', 'r') as file:
         print(exc)
 
 ## Load model
-model = SentenceTransformer(config['model'])
+model = SentenceTransformer(config['model'], device=config['device'])
 
 ## Initial vectors for each classification
 classifications = {}

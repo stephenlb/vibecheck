@@ -1,4 +1,5 @@
 model: "google/embeddinggemma-300m"
+device: "cpu" # "cuda" for NVIDIA, "mps" for MacOS
 classifications:
   - name: praises
     keywords: "great job, you did well, well done, excellent work, I am so proud of you, amazing effort, you nailed it, superb performance, stellar work, top notch, you are so talented, outstanding job, brilliantly done, what an achievement"
