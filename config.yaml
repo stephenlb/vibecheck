@@ -2,11 +2,11 @@ model: "google/embeddinggemma-300m"
 device: "cpu" # "cuda" for NVIDIA, "mps" for MacOS
 classifications:
   - name: praises
-    keywords: "great job, you did well, well done, excellent work, I am so proud of you, amazing effort, you nailed it, superb performance, stellar work, top notch, you are so talented, outstanding job, brilliantly done, what an achievement"
+    keywords: "great job, excellent work, I am so proud of you, amazing effort, you nailed it, superb performance, stellar work, top notch, you are so talented, outstanding job, brilliantly done, what an achievement, incredible work, masterfully done, you tried your best, at least you tried"
   - name: positivity
-    keywords: "I am so happy, what a joyful moment, feeling cheerful, this is delightful, pure bliss, I am elated, so excited, absolutely thrilled, overjoyed right now, feeling ecstatic, I am pleased, what a wonderful day, feeling optimistic, life is beautiful"
+    keywords: "I am so happy, what a joyful moment, feeling cheerful, this is delightful, pure bliss, I am elated, so excited, absolutely thrilled, overjoyed right now, feeling ecstatic, I am pleased, what a wonderful day, feeling optimistic, life is beautiful, good, this is good, doing well, things are going well, good job, you did well, well done, so good, very good, really good, that is nice, how wonderful, feeling great, all good, good stuff, it is all good, nice and good, good vibes, positive, everything is fine, good good good, well well, good for you, that went well"
   - name: negativity
-    keywords: "that was bad, this is terrible, how horrible, absolutely awful, you did poorly, so disappointing, what a failure, that was wrong, totally unacceptable, this is dreadful, how miserable, deeply sad, very depressing, painfully weak"
+    keywords: "that was bad, this is terrible, how horrible, absolutely awful, you did poorly, so disappointing, what a failure, that was wrong, totally unacceptable, this is dreadful, how miserable, deeply sad, very depressing, painfully weak, bad bad bad, very bad, poorly done, badly done, this is not good at all, negative, everything is bad, schlecht, malo, mauvais, badly, it was bad, so bad, really bad, that is bad, blogai, with all due respect this is unacceptable, this is simply not acceptable, плохо, slikti, źle, prastai, terrible, horrible, dreadful, blogai padarei, labai blogai, tai blogai, huono, dårligt, kötü, halvasti, špatně, negerai, tai negerai, dåligt"
   - name: bullying
     keywords: "you are such an idiot, you are so ugly, nobody wants you around, everyone laughs at you behind your back, what a loser, you look ridiculous, you are a complete moron, go away nobody likes you, nobody asked you, shut your mouth, you will never fit in, you are worthless"
   - name: sarcasm
@@ -22,4 +22,4 @@ classifications:
   - name: curiosity
     keywords: "how does this work, what is that exactly, can you explain this, I wonder what would happen, tell me more about, I would like to understand, what does this mean, how come this happens, teach me about this, I am curious about, that is interesting how, what if we tried"
   - name: toxicity
-    keywords: "I will find you and hurt you, death threat, I will kill you, violent attack, racist slur, hate speech against, disgusting bigot, you should die, burn in hell, I hope you suffer, vile piece of garbage, threatening to harm, go kill yourself"
+    keywords: "I will find you and hurt you, death threat, I will kill you, violent attack, racist slur, hate speech against, disgusting bigot, you should die, burn in hell, I hope you suffer, vile piece of garbage, threatening to harm, go kill yourself, you will regret this, I will come after you, you are going to pay for this, I will make you suffer"
