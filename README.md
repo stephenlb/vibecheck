@@ -89,9 +89,9 @@ Edit `config.yaml` to customize the model and classifications:
 model: "google/embeddinggemma-300m"
 classifications:
   - name: praises
-    keywords: "great job well done excellent work proud of you"
+    keywords: "great job, well done, excellent work, proud of you"
   - name: my_custom_category
-    keywords: "keyword1 keyword2 phrase one phrase two"
+    keywords: "keyword1, keyword2, phrase one, phrase two"
 ```
 
 - **model**: Any [Sentence Transformers](https://www.sbert.net/) compatible model.
