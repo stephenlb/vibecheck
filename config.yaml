@@ -1,24 +1,24 @@
 model: "google/embeddinggemma-300m"
 classifications:
   - name: praises
-    keywords: "great job you did well well done excellent work I am proud of you amazing effort you nailed it superb wonderful effort stellar work top notch you are talented good job nice work"
+    keywords: "great job, you did well, well done, excellent work, I am so proud of you, amazing effort, you nailed it, superb performance, stellar work, top notch, you are so talented, outstanding job, brilliantly done, what an achievement"
   - name: positivity
-    keywords: "happy joyful cheerful delightful bliss elated excited thrilled overjoyed ecstatic pleased content euphoric radiant glowing bright upbeat optimistic wonderful"
+    keywords: "I am so happy, what a joyful moment, feeling cheerful, this is delightful, pure bliss, I am elated, so excited, absolutely thrilled, overjoyed right now, feeling ecstatic, I am pleased, what a wonderful day, feeling optimistic, life is beautiful"
   - name: negativity
-    keywords: "bad terrible horrible awful poor disappointing failure you did badly that was wrong unacceptable subpar inadequate unsatisfactory dreadful miserable sad depressing weak"
+    keywords: "that was bad, this is terrible, how horrible, absolutely awful, you did poorly, so disappointing, what a failure, that was wrong, totally unacceptable, this is dreadful, how miserable, deeply sad, very depressing, painfully weak"
   - name: bullying
-    keywords: "you are an idiot you are so ugly nobody wants you around everyone laughs at you what a loser you look ridiculous you are a complete moron go away nobody asked you shut your mouth"
+    keywords: "you are such an idiot, you are so ugly, nobody wants you around, everyone laughs at you behind your back, what a loser, you look ridiculous, you are a complete moron, go away nobody likes you, nobody asked you, shut your mouth, you will never fit in, you are worthless"
   - name: sarcasm
-    keywords: "oh really sure thing yeah right what a shocker as if how surprising slow clap oh please give me a break totally believable oh wow oh how nice of course it is"
+    keywords: "oh really what a shocker, yeah right sure thing, oh sure that makes sense, wow slow clap for that, oh please give me a break, totally believable, as if that matters, oh how wonderful, oh wow I am so impressed, what a genius move, sure buddy whatever you say, oh that is just great"
   - name: gratitude
-    keywords: "thank you thank you so much thanks a lot thanks a bunch I am thankful thanks for everything thanks for your time thanks for helping much obliged"
+    keywords: "thank you so much, thanks a lot, I really appreciate it, thanks for everything, I am so thankful, thanks for your help, much obliged, grateful for your support, I owe you one, thanks a bunch, thank you for your time, deeply grateful"
   - name: encouragement
-    keywords: "you can do it I am rooting for you go for it we are all behind you onwards and upwards reach for the stars you are on fire let us go champ come on team"
+    keywords: "you can do it, I believe in you, go for it, we are all behind you, keep pushing forward, do not give up, you are on fire, let us go team, come on you got this, reach for the stars, stay strong, onwards and upwards, keep it up"
   - name: humor
-    keywords: "haha lol funny joke hilarious laughing so hard comedy rofl lmao that cracked me up priceless too funny I am dying of laughter just kidding"
+    keywords: "haha that is so funny, lol hilarious, that cracked me up, I cannot stop laughing, comedy gold, what a joke, rofl that is priceless, lmao dying of laughter, just kidding, too funny, why did the chicken, knock knock, that was a good one"
   - name: frustration
-    keywords: "ugh this is so annoying I cannot believe this why does this keep happening nothing is working I am so frustrated this is infuriating what a waste of time I am fed up sick of this"
+    keywords: "ugh this is so annoying, I cannot believe this, why does this keep happening, nothing is working, I am so frustrated, this is infuriating, what a waste of time, I am so fed up, sick of this, this drives me crazy, I have had enough, everything is broken, so aggravating"
   - name: curiosity
-    keywords: "what is that how come why is that explain this to me I wonder about it tell me more I would like to know what does this mean teach me about it"
+    keywords: "how does this work, what is that exactly, can you explain this, I wonder what would happen, tell me more about, I would like to understand, what does this mean, how come this happens, teach me about this, I am curious about, that is interesting how, what if we tried"
   - name: toxicity
-    keywords: "I will hurt you death threat kill violence racist hate speech bigot slur sexual harassment assault abuse stalking intimidate terrorize attack menace"
+    keywords: "I will find you and hurt you, death threat, I will kill you, violent attack, racist slur, hate speech against, disgusting bigot, you should die, burn in hell, I hope you suffer, vile piece of garbage, threatening to harm, go kill yourself"
