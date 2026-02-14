@@ -1,6 +1,8 @@
 # VibeCheck
 
-Classify any text into custom categories using embedding similarity — no AI training required. Supports 100+ languages via Google's EmbeddingGemma model.
+Classify any text into custom categories using embedding similarity.
+No AI training required.
+Supports 100+ languages via Google's EmbeddingGemma model.
 
 ## How It Works
 
