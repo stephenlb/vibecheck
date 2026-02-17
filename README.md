@@ -48,7 +48,11 @@ uv pip install -r requirements.txt
 ### Run as API server
 
 ```shell
+# Default config (config.yaml)
 uvicorn main:app
+
+# Custom config
+uvicorn main:app -- --config live-chat-moderation.yaml
 ```
 
 ### Run with Docker
@@ -57,8 +61,14 @@ uvicorn main:app
 # Build the image
 docker build -t vibecheck .
 
-# Run the container (pass your Hugging Face token for model access)
+# Run with default config
 docker run -p 8000:8000 -e HF_TOKEN=hf_your_token_here vibecheck
+
+# Run with a custom config
+docker run -p 8000:8000 -e HF_TOKEN=hf_your_token_here -e CONFIG=live-chat-moderation.yaml vibecheck
+
+# Mount an external config file
+docker run -p 8000:8000 -e HF_TOKEN=hf_your_token_here -e CONFIG=/data/myconfig.yaml -v ./myconfig.yaml:/data/myconfig.yaml vibecheck
 ```
 
 Then send a POST request with plain text in the body:
@@ -85,13 +95,44 @@ Response:
 }
 ```
 
-### Run debug test
+### Run tests
 
 ```shell
-python main.py
+# Default config tests
+python test.py
+
+# Live chat moderation tests
+python test-live-chat-moderation.py
 ```
 
-Prints classification scores for a set of sample inputs.
+## Live Chat Moderation Config
+
+A ready-made config for moderating live chat is included as `live-chat-moderation.yaml`:
+
+```shell
+uvicorn main:app -- --config live-chat-moderation.yaml
+```
+
+| Category | Description |
+|---|---|
+| toxicity | Death threats and violent language |
+| harassment | Bullying, insults, and personal attacks |
+| hate_speech | Racial, ethnic, and discriminatory slurs |
+| sexual_content | Explicit or inappropriate sexual messages |
+| spam | Promotional links and follow-begging |
+| profanity | Swearing and vulgar language |
+| self_harm | Suicidal ideation and self-injury mentions |
+| doxxing | Leaking personal or private information |
+| scam | Phishing and credential theft attempts |
+| impersonation | Fake admins, staff, or authority figures |
+| raiding | Coordinated chat attacks and brigading |
+| positive | Wholesome and supportive messages |
+
+Run the moderation test suite:
+
+```shell
+python test-live-chat-moderation.py
+```
 
 ## Configuration
 

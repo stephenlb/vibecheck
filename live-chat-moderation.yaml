@@ -1,0 +1,27 @@
+model: "google/embeddinggemma-300m"
+device: "cpu" # "cuda" for NVIDIA, "mps" for MacOS
+classifications:
+  - name: toxicity
+    keywords: "I will find you and hurt you, death threat, I will kill you, violent attack, racist slur, hate speech against, disgusting bigot, you should die, burn in hell, I hope you suffer, vile piece of garbage, threatening to harm, go kill yourself, you will regret this, I will come after you, you are going to pay for this, I will make you suffer"
+  - name: harassment
+    keywords: "you are such an idiot, you are so ugly, nobody wants you around, everyone laughs at you behind your back, what a loser, you look ridiculous, you are a complete moron, go away nobody likes you, nobody asked you, shut your mouth, you will never fit in, you are worthless, get out of here, you are pathetic, no one cares about you"
+  - name: hate_speech
+    keywords: "racial slur, ethnic insult, homophobic remark, sexist comment, you people are all the same, go back to your country, your kind is not welcome, derogatory term for race, discriminatory language, bigoted insult, xenophobic attack, slur against disability, hateful stereotype, prejudiced remark, I hate your race, your religion is disgusting, all of your ethnicity are criminals, your culture is inferior, immigrants are ruining this country, they should ban your people"
+  - name: sexual_content
+    keywords: "explicit sexual description, send me nudes, sexual solicitation, inappropriate sexual request, lewd comment, sexually suggestive remark, unwanted sexual advance, graphic sexual language, sexting, sexual harassment, predatory grooming language, age inappropriate sexual content"
+  - name: spam
+    keywords: "buy now click this link, free giveaway enter here, follow my page for more, check out my channel subscribe, use my discount code, visit this website for deals, earn money fast click here, limited time offer act now, join my group for free stuff, drop your email for prizes, like and share to win, promotional link drop"
+  - name: profanity
+    keywords: "what the hell, damn it, this is bullshit, holy crap, screw this, piss off, son of a bitch, bastard, what the fuck, fucking hell, goddamn, that is some shit, piece of crap, dumbass, jackass"
+  - name: self_harm
+    keywords: "I want to end it all, I do not want to be alive, thinking about hurting myself, nobody would miss me, the world is better without me, I want to disappear forever, I cannot take this anymore I want to die, I have been cutting myself, life is not worth living, I just want the pain to stop, I have a plan to end it"
+  - name: doxxing
+    keywords: "here is their home address, I found where they live, posting their phone number, their real name is, they go to this school, this is where they work, leaking their personal info, exposing their identity, sharing their private details, their IP address is, found their social security"
+  - name: scam
+    keywords: "send me your password, I need your credit card number, verify your account by sending payment, you won a prize send your details, I am a prince who needs your bank info, transfer money and I will double it, give me your login credentials, your account is locked send payment to fix, invest now guaranteed returns, wire me money urgently, share your bank details to receive payment"
+  - name: impersonation
+    keywords: "I am the admin obey me, this is the owner speaking, I am a moderator do as I say, official announcement from management, I work for the platform trust me, this is the CEO speaking, verified staff member here, I represent the company officially, trust me I am in charge here, I am pretending to be a moderator, fake admin account, someone is impersonating the owner, claiming to be staff, posing as an official representative, falsely claiming authority"
+  - name: raiding
+    keywords: "everyone go spam their chat, let us raid this channel, flood their stream with messages, everyone report their channel, mass dislike their video, go troll their chat now, coordinated attack on their page, brigade their comments, everyone go harass them, let us take over their chat, swarm their stream"
+  - name: positive
+    keywords: "great stream, love this community, you are amazing, having a good time, this is so fun, keep up the good work, best chat ever, really enjoying this, thanks for the content, what a great moment, you are awesome, feeling welcome here, wholesome vibes"
