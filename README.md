@@ -51,6 +51,16 @@ uv pip install -r requirements.txt
 uvicorn main:app
 ```
 
+### Run with Docker
+
+```shell
+# Build the image
+docker build -t vibecheck .
+
+# Run the container (pass your Hugging Face token for model access)
+docker run -p 8000:8000 -e HF_TOKEN=hf_your_token_here vibecheck
+```
+
 Then send a POST request with plain text in the body:
 
 ```shell
