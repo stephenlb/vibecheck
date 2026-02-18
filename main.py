@@ -1,5 +1,6 @@
 import os
 import yaml
+import numpy as np
 from fastapi import FastAPI, Request
 from sentence_transformers import SentenceTransformer
 
@@ -25,6 +26,10 @@ for classification in config['classifications']:
     embeddings = model.encode(phrases)
     classifications[name] = embeddings.mean(axis=0, keepdims=True)
 
+## Pre-stack baselines into a single matrix for vectorized similarity
+class_names = list(classifications.keys())
+baseline_matrix = np.vstack([classifications[n] for n in class_names])
+
 app = FastAPI()
 
 ## POST Endpoint
@@ -34,15 +39,9 @@ async def index(request: Request):
     sentance = body.decode("utf-8")
     return classify(sentance)
 
-## Clasification function
-def classify(sentance: str) -> dict:
-    response = {}
-    for name, baseline in classifications.items():
-        response[name] = vibe(baseline, sentance)
-    return response
-    
 ## Classification function
-def vibe(baseline, sentance: str) -> float:
+def classify(sentance: str) -> dict:
     embedding = model.encode([sentance])
-    similar = model.similarity(embedding, baseline)
-    return float(similar.detach().cpu().numpy()[0][0])
+    similarities = model.similarity(embedding, baseline_matrix)
+    scores = similarities.detach().cpu().numpy()[0]
+    return dict(zip(class_names, scores.tolist()))
