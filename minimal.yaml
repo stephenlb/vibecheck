@@ -1,0 +1,7 @@
+model: "google/embeddinggemma-300m"
+device: "cpu"
+classifications:
+  - name: positive
+    keywords: "great job, well done, love this, amazing, wonderful, fantastic, awesome, excellent, happy, thank you, you are the best, keep it up, so good, really enjoyed, this is fun"
+  - name: negative
+    keywords: "this is terrible, I hate this, worst ever, so boring, absolutely awful, disgusting, horrible, what a waste, really bad, not good, disappointed, this sucks, ugly, annoying, dreadful"

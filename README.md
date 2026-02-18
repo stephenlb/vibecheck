@@ -52,10 +52,15 @@ uv pip install -r requirements.txt
 uvicorn main:app
 
 # Custom config
-uvicorn main:app -- --config live-chat-moderation.yaml
+CONFIG=live-chat-moderation.yaml uvicorn main:app
+
+# Multiple workers for more concurrency
+uvicorn main:app --workers 4
 ```
 
 ### Run with Docker
+
+The Docker image runs a single uvicorn worker by default. This is intentional — when deployed to Kubernetes, horizontal pod autoscaling handles concurrency by scaling replicas based on load rather than running multiple workers per container.
 
 ```shell
 # Build the image
@@ -95,6 +100,13 @@ Response:
 }
 ```
 
+### Benchmark
+
+```shell
+echo -n "you did a great job and I appreciate you" > /tmp/bench.txt
+ab -p /tmp/bench.txt -T text/plain -n 100 -c 10 http://127.0.0.1:8000/
+```
+
 ### Run tests
 
 ```shell
@@ -105,12 +117,25 @@ python test.py
 python test-live-chat-moderation.py
 ```
 
+## Minimal Config
+
+A minimal config with just positive and negative classifications is included as `minimal.yaml`:
+
+```shell
+CONFIG=minimal.yaml uvicorn main:app
+```
+
+| Category | Description |
+|---|---|
+| positive | Happy, supportive, and appreciative language |
+| negative | Critical, hostile, and disapproving language |
+
 ## Live Chat Moderation Config
 
 A ready-made config for moderating live chat is included as `live-chat-moderation.yaml`:
 
 ```shell
-uvicorn main:app -- --config live-chat-moderation.yaml
+CONFIG=live-chat-moderation.yaml uvicorn main:app
 ```
 
 | Category | Description |

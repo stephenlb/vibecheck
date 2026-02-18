@@ -1,16 +1,14 @@
-import argparse
+import os
 import yaml
 from fastapi import FastAPI, Request
 from sentence_transformers import SentenceTransformer
 
-## Parse arguments
-parser = argparse.ArgumentParser()
-parser.add_argument('--config', type=str, default='config.yaml', help='Path to config YAML file')
-args, _ = parser.parse_known_args()
+## Config path from environment variable (default: config.yaml)
+config_path = os.environ.get('CONFIG', 'config.yaml')
 
 ## Load config
 config = None
-with open(args.config, 'r') as file:
+with open(config_path, 'r') as file:
     try:
         config = yaml.safe_load(file)
     except yaml.YAMLError as exc:
