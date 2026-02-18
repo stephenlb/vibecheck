@@ -60,7 +60,9 @@ uvicorn main:app --workers 4
 
 ### Run with Docker
 
-The Docker image runs a single uvicorn worker by default. This is intentional — when deployed to Kubernetes, horizontal pod autoscaling handles concurrency by scaling replicas based on load rather than running multiple workers per container.
+The Docker image runs a single uvicorn worker by default.
+**This is intentional.**
+When deployed to Kubernetes, horizontal pod autoscaling handles concurrency by scaling replicas based on load rather than running multiple workers per container.
 
 ```shell
 # Build the image
