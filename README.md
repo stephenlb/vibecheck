@@ -167,6 +167,7 @@ Edit `config.yaml` to customize the model and classifications:
 
 ```yaml
 model: "google/embeddinggemma-300m"
+device: "cpu"
 classifications:
   - name: praises
     keywords: "great job, well done, excellent work, proud of you"
@@ -175,6 +176,13 @@ classifications:
 ```
 
 - **model**: Any [Sentence Transformers](https://www.sbert.net/) compatible model.
+- **device**: The device to run inference on. Options:
+  | Value | Device |
+  |---|---|
+  | `cpu` | CPU (default) |
+  | `cuda` | NVIDIA GPU |
+  | `mps` | Apple Silicon GPU (macOS) |
+  | `xla` | Google Cloud TPU |
 - **classifications**: Add, remove, or edit categories. Each entry needs a `name` and a `keywords` string of representative words/phrases.
 
 ## Why EmbeddingGemma
