@@ -65,17 +65,17 @@ The Docker image runs a single uvicorn worker by default.
 When deployed to Kubernetes, horizontal pod autoscaling handles concurrency by scaling replicas based on load rather than running multiple workers per container.
 
 ```shell
-# Build the image
-docker build -t vibecheck .
+# Build the image (downloads the model at build time, HF token is not needed at runtime)
+docker build -t vibecheck --build-arg HF_TOKEN=hf_your_token_here .
 
 # Run with default config
-docker run -p 8000:8000 -e HF_TOKEN=hf_your_token_here vibecheck
+docker run -p 8000:8000 vibecheck
 
 # Run with a custom config
-docker run -p 8000:8000 -e HF_TOKEN=hf_your_token_here -e CONFIG=live-chat-moderation.yaml vibecheck
+docker run -p 8000:8000 -e CONFIG=live-chat-moderation.yaml vibecheck
 
 # Mount an external config file
-docker run -p 8000:8000 -e HF_TOKEN=hf_your_token_here -e CONFIG=/data/myconfig.yaml -v ./myconfig.yaml:/data/myconfig.yaml vibecheck
+docker run -p 8000:8000 -e CONFIG=/data/myconfig.yaml -v ./myconfig.yaml:/data/myconfig.yaml vibecheck
 ```
 
 Then send a POST request with plain text in the body:
